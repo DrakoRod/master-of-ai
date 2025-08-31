@@ -8,7 +8,9 @@ import (
 	"os"
 )
 
-// Here you can add helper functions that can be used across the project
+/*
+Function to calculate the Euclidean distance between two points
+*/
 
 func DistanceEuclidean(a, b []float64) float64 {
 
@@ -34,6 +36,9 @@ func DistanceEuclidean(a, b []float64) float64 {
 	return result
 }
 
+/*
+Function to read a CSV file and return the data as a slice of string slices
+*/
 func ReadCsvFile(filePath string) ([][]string, error) {
 	file, err := os.Open(filePath)
 	if err != nil {
