@@ -9,20 +9,27 @@ import (
 )
 
 func init() {
-	rootCmd.AddCommand(knnCmd)
+	rootCmd.AddCommand(kmeansCmd)
 }
 
 var kmeansCmd = &cobra.Command{
 	Use:   "kmeans",
-	Short: "kmeans - is a k Nearest Neighbor algorithm to classify data points",
+	Short: "kmeans - is a k-means clustering algorithm to group data points",
 	Long: `
-	Nearest neighbor algorithms are among the “simplest” supervised machine learning algorithms 
-	and have been well studied in the field of pattern recognition over the last century.
+	 is an unsupervised learning algorithm that groups data points into K clusters 
+	 by assigning each data point to the cluster with the closest mean, or centroid.
 	`,
 	Run: func(cmd *cobra.Command, args []string) {
 		kmeans()
 	},
 }
+
+/*
+
+https://www.iebschool.com/hub/algoritmo-k-means-que-es-y-como-funciona-big-data/
+
+
+*/
 
 func kmeans() {
 	slog.Info("Knn algorithm")

@@ -2,10 +2,13 @@ package helpers
 
 import (
 	"bytes"
+	"errors"
+	"fmt"
 	"io"
 	"log/slog"
 	"math"
 	"os"
+	"strconv"
 )
 
 /*
@@ -32,6 +35,39 @@ func DistanceEuclidean(a, b []float64) float64 {
 	}
 
 	result = math.Sqrt(sum)
+
+	return result
+}
+
+/*
+Function to calculate the average of a slice of float32 numbers.
+*/
+
+func GetAvearage(data []float32) float32 {
+	var sum float32 = 0
+	for _, value := range data {
+		sum += value
+	}
+	return sum /
+		float32(len(data))
+}
+
+func GetArrayWithoutLabel(data []string) []float64 {
+	// Function to return an array without the label
+
+	result := make([]float64, 0)
+
+	for i := 0; i < len(data)-1; i++ {
+		var value float64
+
+		slog.Info("Data[i]:", "value", data[i])
+		value, err := strconv.ParseFloat(data[i], 64) // 64 for float64
+		if err != nil {
+			slog.Error("Error converting string to float64", "error", err)
+			os.Exit(1)
+		}
+		result = append(result, value)
+	}
 
 	return result
 }
@@ -67,4 +103,29 @@ func ReadCsvFile(filePath string) ([][]string, error) {
 	}
 
 	return data, nil
+}
+
+func GetMax(m map[string]int) (string, error) {
+	// Handle empty map case
+	if len(m) == 0 {
+		fmt.Println("Map is empty, no maximum value.")
+		return "", errors.New("empty map")
+	}
+
+	// Initialize maxVal with the value of the first element
+	var labelResult string
+	var maxVal int
+	for _, v := range m {
+		maxVal = v // Assign the first value to maxVal
+		break      // Exit after assigning the first value
+	}
+
+	// Iterate and find the maximum
+	for label, v := range m {
+		if v > maxVal {
+			labelResult = label
+			maxVal = v
+		}
+	}
+	return labelResult, nil
 }
