@@ -11,12 +11,12 @@ import (
 )
 
 func init() {
-	rootCmd.AddCommand(knnCmd)
+	rootCmd.AddCommand(kmodesCmd)
 }
 
-var knnCmd = &cobra.Command{
-	Use:   "knn",
-	Short: "Knn - is a k Nearest Neighbor algorithm to classify data points",
+var kmodesCmd = &cobra.Command{
+	Use:   "kmodes",
+	Short: "kmodes - is a k Modes algorithm to classify data points",
 	Long: `
 	Nearest neighbor algorithms are among the “simplest” supervised machine learning algorithms 
 	and have been well studied in the field of pattern recognition over the last century.
@@ -26,22 +26,18 @@ var knnCmd = &cobra.Command{
 	},
 }
 
-type Sample struct {
-	Features []float64
+/*
+Links
+*/
+type SampleCategory struct {
+	Features []string
 	Distance []float64
 	Label    string
 }
 
-/*
-Links
+func kmodes() {
 
-https://medium.com/swlh/k-nearest-neighbor-ca2593d7a3c4
-
-*/
-
-func knn() {
-
-	slog.Info("Knn algorithm")
+	slog.Info("kModes Alogorithm")
 
 	dir, err := os.Getwd()
 	if err != nil {
@@ -132,21 +128,4 @@ func knn() {
 	// Step-6: Our model is ready.
 	slog.Info("Knn algorithm finished")
 
-}
-
-func orderSamplesByDistance(samples []Sample) []Sample {
-	// Function to order samples by distance
-
-	// Using Bubble sort algorithm to sort the samples by distance
-	n := len(samples)
-	for i := 0; i < n-1; i++ {
-		for j := 0; j < n-i-1; j++ {
-			if samples[j].Distance[0] > samples[j+1].Distance[0] {
-				// swap samples[j] and samples[j+1]
-				samples[j], samples[j+1] = samples[j+1], samples[j]
-			}
-		}
-	}
-
-	return samples
 }

@@ -60,7 +60,7 @@ func GetArrayWithoutLabel(data []string) []float64 {
 	for i := 0; i < len(data)-1; i++ {
 		var value float64
 
-		slog.Info("Data[i]:", "value", data[i])
+		//slog.Info("Data[i]:", "value", data[i])
 		value, err := strconv.ParseFloat(data[i], 64) // 64 for float64
 		if err != nil {
 			slog.Error("Error converting string to float64", "error", err)
