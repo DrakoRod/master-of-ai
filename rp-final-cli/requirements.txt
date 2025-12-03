@@ -1,0 +1,10 @@
+click
+kagglehub
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
+pydotplus
+IPython
+graphviz
